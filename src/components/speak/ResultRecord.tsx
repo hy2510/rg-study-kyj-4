@@ -45,6 +45,8 @@ export default function ResultRecord({
     changeRecordResult(false)
   }
 
+  const [togglePhonemes, setTogglePhonemes] = useState(false)
+
   return (
     <div className={SpeakCSS.screenBlock}>
       <div className={SpeakCSS.popUp}>
@@ -53,15 +55,15 @@ export default function ResultRecord({
             className={`${SpeakCSS.btn} ${SpeakCSS.gray}`}
             onClick={() => playAudio(nativeAudio)}
           >
-            <span>원어민 발음</span>
+            <span>Native</span>
             <span className={SpeakCSS.iconSpeaker}></span>
           </div>
 
           <div
-            className={`${SpeakCSS.btn} ${SpeakCSS.blue}`}
+            className={`${SpeakCSS.btn} ${SpeakCSS.gray}`}
             onClick={() => playAudio(userAudio)}
           >
-            <span>내 발음</span>
+            <span>My</span>
             <span className={SpeakCSS.iconSpeaker}></span>
           </div>
         </div>
@@ -69,22 +71,65 @@ export default function ResultRecord({
         <div className={SpeakCSS.row2}>
           <div className={SpeakCSS.sentence}>
             {sentenceScore.phoneme_result.words.map((word) => {
-              return <div className={SpeakCSS.word}>{word.word}</div>
+              return (
+                <div className={`${SpeakCSS.word} ${SpeakCSS.red}`}>
+                  {word.word}
+                </div>
+              )
             })}
           </div>
 
-          <div className={SpeakCSS.phonemes}>
+          <div
+            className={SpeakCSS.phonemes}
+            style={{ display: togglePhonemes ? 'flex' : 'none' }}
+          >
             {sentenceScore.phoneme_result.words.map((word) => {
               return (
-                <>
-                  {word.phonemes.map((phoneme) => {
-                    return (
-                      <div className={SpeakCSS.phoneme}>{phoneme.phoneme}</div>
-                    )
-                  })}
-                </>
+                <div className={SpeakCSS.wordContainer}>
+                  <div className={SpeakCSS.row1}>{word.word}</div>
+                  <div className={SpeakCSS.row2}>
+                    {word.phonemes.map((phoneme) => {
+                      return (
+                        <div className={SpeakCSS.phonemeResult}>
+                          <div
+                            className={`${SpeakCSS.phoneme} 
+                            ${phoneme.score < 30 && SpeakCSS.red}
+                            ${
+                              phoneme.score >= 30 &&
+                              phoneme.score < 70 &&
+                              SpeakCSS.orange
+                            }  
+                            ${phoneme.score >= 70 && SpeakCSS.green}  
+                            `}
+                          >
+                            {phoneme.phoneme}
+                          </div>
+                          <div className={SpeakCSS.phonemeScore}>
+                            {Math.floor(phoneme.score)}%
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
               )
             })}
+          </div>
+
+          <div
+            className={SpeakCSS.btnToggle}
+            onClick={() => {
+              togglePhonemes
+                ? setTogglePhonemes(false)
+                : setTogglePhonemes(true)
+            }}
+          >
+            {togglePhonemes ? 'close' : 'detail'}
+            <span
+              className={`${SpeakCSS.icoChev} ${
+                togglePhonemes && SpeakCSS.rotate
+              }`}
+            ></span>
           </div>
         </div>
 

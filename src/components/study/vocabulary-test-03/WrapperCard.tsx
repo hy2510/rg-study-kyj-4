@@ -56,7 +56,9 @@ export default function WrapperCard({
         />
 
         {bottomPopupState.isActive && bottomPopupState.isCorrect ? (
-          <></>
+          <>
+            <div className={style.enterButton}></div>
+          </>
         ) : (
           <>
             {/*  버튼 */}
