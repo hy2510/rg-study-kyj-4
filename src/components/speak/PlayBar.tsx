@@ -60,6 +60,9 @@ export default function PlayBar({
           {playBarState === 'playing-sentence' && <PlayBarPlaySentence />}
 
           {playBarState === 'recording' && <PlayBarRecording />}
+
+          {/* 녹음진행시간 프로그래스바 */}
+          <div className={SpeakCSS.recProgress} style={{ width: '50%' }}></div>
         </div>
       </div>
     </div>

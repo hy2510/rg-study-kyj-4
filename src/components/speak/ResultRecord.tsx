@@ -49,7 +49,7 @@ export default function ResultRecord({
 
   return (
     <div className={SpeakCSS.screenBlock}>
-      <div className={SpeakCSS.popUp}>
+      <div className={`${SpeakCSS.popUp} animate__animated animate__zoomIn`}>
         <div className={SpeakCSS.row1}>
           <div
             className={`${SpeakCSS.btn} ${SpeakCSS.gray}`}
@@ -105,7 +105,7 @@ export default function ResultRecord({
                             {phoneme.phoneme}
                           </div>
                           <div className={SpeakCSS.phonemeScore}>
-                            {Math.floor(phoneme.score)}%
+                            {Math.floor(phoneme.score)}
                           </div>
                         </div>
                       )

@@ -36,6 +36,7 @@ import Gap from '@components/study/common-study/Gap'
 // components - vocabulary practice 3
 import WrapperCard from '@components/study/vocabulary-practice-03/WrapperCard'
 import TestResultVP3 from '@components/study/vocabulary-practice-03/TestResultVP3'
+import StudyModeSelectTab from '@components/study/vocabulary-practice-03/StudyModeSelectTab'
 
 const STEP_TYPE = 'Vocabulary Practice'
 
@@ -87,6 +88,10 @@ export default function VocabularyPractice3(props: IStudyData) {
   const { playState, playAudio, stopAudio } = useStudyAudio()
 
   const [isRetry, setRetry] = useState(false)
+
+  // 스피킹모드
+  const [isSpeakMode, setIsSpeakMode] = useState(true)
+  const [isRecord, setIsRecord] = useState(false)
 
   // 인트로가 없어지면
   useEffect(() => {
@@ -467,11 +472,16 @@ export default function VocabularyPractice3(props: IStudyData) {
               </div>
 
               <QuizBody>
+                <StudyModeSelectTab
+                  isSpeakMode={isSpeakMode}
+                  setIsSpeakMode={setIsSpeakMode}
+                />
+
                 <Container
                   typeCSS={style.vocabularyPractice3}
                   containerCSS={style.container}
                 >
-                  <Gap height={20} />
+                  <Gap height={10} />
 
                   <WrapperCard
                     isSideOpen={isSideOpen}
@@ -483,6 +493,9 @@ export default function VocabularyPractice3(props: IStudyData) {
                     playWord={playWord}
                     changeInputVal={changeInputVal}
                     checkAnswer={checkAnswer}
+                    isSpeakMode={isSpeakMode}
+                    isRecord={isRecord}
+                    setIsRecord={setIsRecord}
                   />
                 </Container>
               </QuizBody>

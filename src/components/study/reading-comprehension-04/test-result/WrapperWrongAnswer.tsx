@@ -23,7 +23,9 @@ export default function WrapperWrongAnswer({
 }: WrapperWrongAnswerProps) {
   return (
     <div className={style.wrongAnswers}>
-      <div className={style.title}>Wrong Answers</div>
+      {failedExample.length != 0 && (
+        <div className={style.title}>Wrong Answers</div>
+      )}
       {failedExample.map((example, i) => {
         return (
           <CardWrongAnswer

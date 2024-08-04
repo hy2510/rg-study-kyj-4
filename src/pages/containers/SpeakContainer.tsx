@@ -11,6 +11,7 @@ import { getSpeakData } from '@services/speakApi'
 
 import SpeakPC from '@pages/speak/SpeakPC'
 import SpeakMobile from '@pages/speak/SpeakMobile'
+import { LottieRecordAniBig } from '@components/common/LottieAnims'
 
 const md = new MobileDetect(navigator.userAgent)
 const isMobile = md.phone()
@@ -43,6 +44,8 @@ export default function SpeakContainer() {
   const [quizIndex, setQuizIndex] = useState(0)
   const [playBarState, setPlayBarState] = useState<PlayBarState>('')
   const [userAudio, setUserAudio] = useState('')
+
+  const [isIntroOpen, setIsIntroOpen] = useState(true)
 
   // 창 크기가 변경되거나 가로/세로가 변경되는 등의 행위가 일어나면
   useEffect(() => {
@@ -140,38 +143,83 @@ export default function SpeakContainer() {
     // ></iframe>
     <>
       {isStepIntro ? (
-        <div className={SpeakCSS.screenBlock}>
+        <div
+          className={SpeakCSS.screenBlock}
+          style={{ backgroundImage: `url(${bookInfo.BackgroundImage})` }}
+        >
           <div
-            className={SpeakCSS.startButton}
-            onClick={() => closeStepIntro()}
+            className={`${SpeakCSS.speakButtonArea} animate__animated ${
+              isIntroOpen ? 'animate__bounceInRight' : 'animate__bounceOutLeft'
+            }`}
           >
-            Let's Speak!
+            <img
+              src="src/assets/images/speak/dodo_23_1.png"
+              alt=""
+              width={150}
+              height={'auto'}
+              style={{ position: 'relative', zIndex: 2 }}
+            />
+            <div
+              className={SpeakCSS.startButton}
+              onClick={() => {
+                setIsIntroOpen(false)
+                setTimeout(() => {
+                  closeStepIntro()
+                }, 1000)
+              }}
+            >
+              Let's Speak!
+            </div>
+            <div
+              className={`${SpeakCSS.recAni} animate__animated ${
+                isIntroOpen ? 'animate__zoomIn' : 'animate__zoomOut'
+              }`}
+            >
+              <LottieRecordAniBig />
+            </div>
           </div>
+          <div className={SpeakCSS.screenBgColor}></div>
         </div>
       ) : (
         <>
           {isMobile ? (
-            <SpeakMobile
-              playBarState={playBarState}
-              tryCount={tryCount}
-              speakData={speakData}
-              quizIndex={quizIndex}
-              changeQuizIndex={changeQuizIndex}
-              changePlayBarState={changePlayBarState}
-              increaseTryCount={increaseTryCount}
-              resetTryCount={resetTryCount}
-            />
+            <div
+              className={SpeakCSS.speackBodyBg}
+              style={{ backgroundImage: `url(${bookInfo.BackgroundImage})` }}
+            >
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <SpeakMobile
+                  playBarState={playBarState}
+                  tryCount={tryCount}
+                  speakData={speakData}
+                  quizIndex={quizIndex}
+                  changeQuizIndex={changeQuizIndex}
+                  changePlayBarState={changePlayBarState}
+                  increaseTryCount={increaseTryCount}
+                  resetTryCount={resetTryCount}
+                />
+              </div>
+              <div className={SpeakCSS.speackBodyBgColor}></div>
+            </div>
           ) : (
-            <SpeakPC
-              playBarState={playBarState}
-              tryCount={tryCount}
-              speakData={speakData}
-              quizIndex={quizIndex}
-              changeQuizIndex={changeQuizIndex}
-              changePlayBarState={changePlayBarState}
-              increaseTryCount={increaseTryCount}
-              resetTryCount={resetTryCount}
-            />
+            <div
+              className={SpeakCSS.speackBodyBg}
+              style={{ backgroundImage: `url(${bookInfo.BackgroundImage})` }}
+            >
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <SpeakPC
+                  playBarState={playBarState}
+                  tryCount={tryCount}
+                  speakData={speakData}
+                  quizIndex={quizIndex}
+                  changeQuizIndex={changeQuizIndex}
+                  changePlayBarState={changePlayBarState}
+                  increaseTryCount={increaseTryCount}
+                  resetTryCount={resetTryCount}
+                />
+              </div>
+              <div className={SpeakCSS.speackBodyBgColor}></div>
+            </div>
           )}
         </>
       )}

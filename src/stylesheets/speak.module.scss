@@ -37,30 +37,78 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(0, 0, 0, 0.5);
+  background-color: rgba($color: #000000, $alpha: 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
+  background-position: center;
+  background-size: cover;
+  .screenBgColor {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
 }
 
-.startButton {
-  cursor: pointer;
-  width: 100%;
-  max-width: 300px;
-  height: 50px;
-  background-color: #ff274f;
-  color: white;
-  font-weight: 500;
-  font-size: 1.2em;
-  border-radius: 15px;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+.speakButtonArea {
+  position: relative;
+  z-index: 3;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  &:active {
-    transform: scale(0.95);
+  gap: 10px;
+  .startButton {
+    cursor: pointer;
+    min-width: 250px;
+    width: 100%;
+    // max-width: 300px;
+    height: 50px;
+    background-color: #ff274f;
+    color: white;
+    font-weight: 500;
+    font-size: 1.2em;
+    border-radius: 15px;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 2;
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+  .recAni {
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+    height: 200px;
+    opacity: 0.5;
+  }
+}
+
+.speackBodyBg {
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  .speackBodyBgColor {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
   }
 }
 
@@ -129,13 +177,14 @@ button {
 .playBar {
   width: 100%;
   height: 60px;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
   color: #fff;
   font-family: Rg-B, sans-serif;
+  position: relative;
   .progress {
     width: 100%;
     height: 4px;
@@ -145,6 +194,15 @@ button {
       border-radius: 100px;
       background-color: #d95355;
     }
+  }
+  .recProgress {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: rgba($color: #2ccd70, $alpha: 0.5);
+    transition: all 0.2s;
   }
 }
 
@@ -212,6 +270,8 @@ button {
   justify-content: center;
   gap: 10px;
   animation-duration: 0.2s;
+  position: relative;
+  z-index: 2;
   .txtLabel {
     display: flex;
     align-items: center;
@@ -306,13 +366,13 @@ button {
 }
 
 .popUp {
-  width: 100%;
+  width: calc(100% - 30px);
   max-width: 800px;
   height: 70vh;
   max-height: 500px;
   background-color: #f0f2f5;
   border-radius: 20px;
-  padding: 20px;
+  padding: 15px;
   position: relative;
 
   .row1 {

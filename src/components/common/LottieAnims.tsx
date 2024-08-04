@@ -51,6 +51,28 @@ export function LottieRecordAni() {
   )
 }
 
+export function LottieRecordAniBig() {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: aniDataRecord,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+
+  return (
+    <>
+      <Lottie
+        isClickToPauseDisabled
+        options={defaultOptions}
+        height={200}
+        width={200}
+      />
+    </>
+  )
+}
+
 export function LottieUserSayAni() {
   const defaultOptions = {
     loop: true,

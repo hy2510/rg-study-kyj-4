@@ -144,6 +144,14 @@
     &.large {
       font-size: 1.5em;
     }
+    &.nextToVocaTest {
+      color: #1a1a1a;
+      font-size: 1.5em;
+      background-color: transparent;
+      @media (prefers-color-scheme: dark) {
+        color: #fff;
+      }
+    }
   }
   .totalScoreContainer {
     width: 100%;
@@ -178,6 +186,9 @@
     border-bottom: 1.5px dotted rgba($color: #000, $alpha: 0.3);
     @media (prefers-color-scheme: dark) {
       border-bottom: 1.5px dotted rgba($color: #fff, $alpha: 0.3);
+    }
+    &.borderNone {
+      border-bottom: none;
     }
     &::-webkit-scrollbar {
       display: none;
@@ -281,41 +292,10 @@
     cursor: pointer;
     text-align: center;
     border-radius: 12px;
-    border-top: 1px solid #3ab6ff;
-    border-right: 1px solid #3ab6ff;
-    border-bottom: 1px solid #3ab6ff;
-    border-left: 1px solid #3ab6ff;
-    background-color: deepskyblue;
-    color: #fff;
-    font-size: 1.2em;
-    font-family: 'Rg-B', sans-serif;
-    width: fit-content;
-    padding: 15px 20px;
-    transform: scale(1);
-    transition: all 0.2s;
-    -webkit-tap-highlight-color: transparent;
-    animation: 1s linear infinite alternate shadow;
-    @keyframes shadow {
-      from {
-        box-shadow: 0 0 0px ivory;
-      }
-      to {
-        box-shadow: 0 0 10px ivory;
-      }
-    }
-    &:active {
-      transform: scale(0.9);
-    }
-  }
-  .notYetButton {
-    min-width: 270px;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 12px;
-    border-top: 1px dotted grey;
-    border-right: 1px dotted grey;
-    border-bottom: 1px dotted grey;
-    border-left: 1px dotted grey;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 3px solid #000;
+    border-left: 1px solid #000;
     background-color: #1a1a1a;
     color: #fff;
     font-size: 1.2em;
@@ -325,6 +305,40 @@
     transform: scale(1);
     transition: all 0.2s;
     -webkit-tap-highlight-color: transparent;
+    // animation: 1s linear infinite alternate shadow;
+    // @keyframes shadow {
+    //   from {
+    //     box-shadow: 0 0 0px ivory;
+    //   }
+    //   to {
+    //     box-shadow: 0 0 10px ivory;
+    //   }
+    // }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+  .notYetButton {
+    min-width: 270px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 12px;
+    // border-top: 1px dotted grey;
+    // border-right: 1px dotted grey;
+    // border-bottom: 1px dotted grey;
+    // border-left: 1px dotted grey;
+    // background-color: #1a1a1a;
+    background-color: transparent;
+    color: rgba($color: #000, $alpha: 0.5);
+    font-family: 'Rg-B', sans-serif;
+    width: fit-content;
+    padding: 15px 20px;
+    transform: scale(1);
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    @media (prefers-color-scheme: dark) {
+      color: rgba($color: #fff, $alpha: 0.5);
+    }
     &:active {
       transform: scale(0.9);
     }

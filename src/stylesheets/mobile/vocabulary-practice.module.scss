@@ -361,7 +361,7 @@
       display: grid;
       grid-template-columns: 44px 1fr 44px;
       align-items: center;
-      justify-items: start;
+      justify-items: center;
       .textField {
         width: 100%;
         height: 60px;
@@ -386,6 +386,9 @@
           left: 0;
           z-index: 2;
           letter-spacing: -0.8px;
+          &.overLength {
+            font-size: 0.9em;
+          }
         }
         .wordText {
           display: flex;
@@ -408,6 +411,9 @@
           z-index: 1;
           @media (prefers-color-scheme: dark) {
             border: 2px solid rgba($color: #000000, $alpha: 0.3);
+          }
+          &.overLength {
+            font-size: 0.9em;
           }
         }
         .count {
@@ -448,7 +454,35 @@
         }
       }
     }
+    .skipButton {
+      position: absolute;
+      top: 18px;
+      right: 15px;
+      font-family: 'Rg-R', sans-serif;
+      font-size: 0.8em;
+      background-color: #000;
+      color: #fff;
+      padding: 3px 8px;
+      padding-top: 5px;
+      padding-left: 10px;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      transform: scale(1);
+      transition: all 0.2s;
+      img {
+        display: block;
+        padding-bottom: 2px;
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
     .meaning {
+      width: calc(100% - 80px);
+      margin: auto;
       padding-left: 10px;
       line-height: 1.2;
       .txtL {
@@ -566,4 +600,186 @@
     }
   }
   @include goNextStepBox;
+}
+
+.studyModeSelectTab {
+  display: flex;
+  gap: 15px;
+  padding: 5px;
+  width: fit-content;
+  .btnTab {
+    cursor: pointer;
+    font-family: 'Rg-B', sans-serif;
+    color: rgba($color: #000, $alpha: 0.3);
+    &.active {
+      color: #1a1a1a;
+    }
+    @media (prefers-color-scheme: dark) {
+      color: rgba($color: #fff, $alpha: 0.3);
+      &.active {
+        color: #fff;
+      }
+    }
+  }
+}
+
+// Speak
+.speakQuestionText {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  .word {
+    width: calc(100% - 40px);
+    height: calc(100% - 24px);
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-family: 'Rg-B', sans-serif;
+    font-size: 1.6em;
+    color: #000;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 2px solid #ccc;
+    padding: 10px 20px;
+    padding-left: 15px;
+    @media (prefers-color-scheme: dark) {
+      border: 2px solid rgba($color: #000000, $alpha: 0.3);
+    }
+    &.overLength {
+      font-size: 0.9em;
+    }
+  }
+  .recProgress {
+    background-color: rgba($color: #2ccd70, $alpha: 0.25);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    z-index: 2;
+    border-radius: 13px;
+    transition: all 0.2s;
+  }
+}
+.btnRec {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: 2px;
+  &:active {
+    transform: scale(0.9);
+  }
+  .recIcon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fe0101;
+    padding: 5px;
+    border-radius: 100px;
+  }
+}
+
+.speakResult {
+  width: calc(100% - 80px - 30px);
+  min-height: 100px;
+  background-color: rgba($color: #fff, $alpha: 0.3);
+  border-radius: 15px;
+  padding: 15px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  @media (prefers-color-scheme: dark) {
+    background-color: rgba($color: #000, $alpha: 0.3);
+  }
+  .word {
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: 500;
+  }
+  .phonemes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    transition: all 0.2s;
+    overflow-x: scroll;
+    .phonemeItem {
+      .phoneme {
+        font-size: 0.8em;
+        font-weight: 500;
+        background-color: #333;
+        color: #fff;
+        border-radius: 5px;
+        padding: 2px 5px;
+        &.red {
+          background-color: #ff274f;
+        }
+        &.orange {
+          background-color: #ffc148;
+        }
+        &.green {
+          background-color: #2ccd70;
+        }
+      }
+      .phonemeScore {
+        font-size: 0.5em;
+        color: #999;
+        width: 100%;
+        text-align: center;
+        margin-top: 3px;
+      }
+    }
+  }
+}
+
+.speakResultSign {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  .signBox {
+    cursor: pointer;
+    width: 100%;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    &.goodJob {
+      background-color: #3ab6ff;
+    }
+    &.tryAgain {
+      background-color: #ff2424;
+    }
+    .txt {
+      color: #fff;
+      font-family: 'Rg-B', sans-serif;
+      font-size: 1.25em;
+      font-weight: 600;
+    }
+    .iconArrow {
+      width: 24px;
+      height: 24px;
+      background-image: url('/src/assets/images/speak/chev_right.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 24px 24px;
+    }
+  }
 }

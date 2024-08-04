@@ -91,7 +91,11 @@ export default function Input({
     <div className={style.textField}>
       <input
         ref={inputRef}
-        className={style.inputField}
+        className={`${style.inputField} ${
+          quizData.Quiz[quizNo - 1].Question.Text.length > 20
+            ? style.overLength
+            : ''
+        }`}
         type="text"
         value={inputVal}
         autoCapitalize="off"
@@ -106,7 +110,13 @@ export default function Input({
         autoFocus
         tabIndex={-1}
       />
-      <div className={style.wordText}>
+      <div
+        className={`${style.wordText} ${
+          quizData.Quiz[quizNo - 1].Question.Text.length > 20
+            ? style.overLength
+            : ''
+        }`}
+      >
         {quizData.Quiz[quizNo - 1].Question.Text}
       </div>
       <div className={style.count}>

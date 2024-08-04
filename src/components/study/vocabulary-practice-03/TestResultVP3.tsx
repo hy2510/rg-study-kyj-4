@@ -24,13 +24,13 @@ export default function TestResultVP3({
 
   return (
     <div className={style.testResult}>
-      <div className={`${style.quizType} ${style.large}`}>
-        Step 2. Vocabulary Test
+      <div className={`${style.quizType} ${style.nextToVocaTest}`}>
+        Begin Vocabulary Test?
       </div>
 
       <Gap height={30} />
 
-      <div className={style.container}>
+      <div className={`${style.container} ${style.borderNone}`}>
         <div
           className={`${style.readingUnit} animate__animated animate__jackInTheBox`}
         >
@@ -60,7 +60,7 @@ export default function TestResultVP3({
           changeRetry(true)
         }}
       >
-        Not yet!
+        Not yet
       </div>
     </div>
   )
